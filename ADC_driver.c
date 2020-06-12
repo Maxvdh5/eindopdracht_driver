@@ -21,17 +21,17 @@ const int amount = 0;
 static const char device_name[] = "driver-van-max";
 static struct class *cl;
 
-static const struct of_device_id of_driver-van-max_match_tbl[] = {
-        { .compatible = "maxinc,lightsensor", },
+static const struct of_device_id of_driver_van_max_match_tbl[] = {
+        { .compatible = "maxinc,lightsensor"},
         { /* end */ }
 };
 
-MODULE_DEVICE_TABLE(of, of_driver-van-max_match_tbl);
+MODULE_DEVICE_TABLE(of, of_driver_van_max_match_tbl);
 
 static struct cdev device;
 static dev_t dev_num;
 
-char* sysfs_adc = "/sys/devices/ocp.2/helper.14/AIN0"
+char* sysfs_adc = "/sys/devices/ocp.2/helper.14/AIN0";
 
 ssize_t dev_read(struct file *filp, char *buffer, size_t len, loff_t *offset){
     struct file     *data_fp;
@@ -49,9 +49,9 @@ ssize_t dev_read(struct file *filp, char *buffer, size_t len, loff_t *offset){
     }
 
     // open the device and read it's data
-    data_fp = filp_open(*sysfs_path, O_RDONLY, 0);
+    data_fp = filp_open(sysfs_adc, O_RDONLY, 0);
     if (data_fp == NULL) {
-        printk(KERN_ALERT "%s: filp_open failed", DEVICE_NAME);
+        printk(KERN_ALERT "%s: filp_open failed", device_name);
         return -EFAULT;
     }
 
